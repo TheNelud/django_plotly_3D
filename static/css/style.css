@@ -258,10 +258,12 @@
 {
     font-size: 12px;
 }
+
+
 .home-section
 {
     position: relative;
-    background: #e4e9f7;
+    background: #ffffff;
     height: 100vh;
     left: 260px;
     width: calc(100%-260px);
@@ -270,7 +272,7 @@
 .sidebar.close ~ .home-section
 {
     left: 78px;
-    width: calc(100%-78px);
+    width: calc(100%-68px); /*78*/
 }
 .home-section .home-content
 {
@@ -294,3 +296,5 @@
     font-size: 26px;
     font-weight: 600;
 }
+
+

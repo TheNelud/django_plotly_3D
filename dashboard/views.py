@@ -43,22 +43,13 @@ def index(request):
 
     layout =go.Layout(
         title=f'Визуализация данных журнала ...',
-        width=1600,
-        height=900,
+        width=1700,
+        height=800,
         # legend_bgcolor= '#000000'
     )
-    # for item in data:
-    #     figure = go.Figure(obj_Mesh_cube(item.skv_x, item.skv_y, item.skv_z, item.skv_name), layout=layout).to_html()
-
+   
     figure = go.Figure([obj_Mesh_cube(item.skv_x, item.skv_y, item.skv_z, item.skv_name) for item in data], layout=layout ).to_html()
-
-
-    # for item in data:
-    #     figure.add_trace(obj_Mesh_cube(item.skv_x, item.skv_y, item.skv_z, item.skv_name)).to_html()
-
-
-    # figure.update_traces().to_html()
-
+    
     context = {
         'figure' : figure, 
         }
