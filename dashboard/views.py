@@ -7,7 +7,13 @@ import random
 from .models import Dashboard
 #Create figure
 
-def obj_Mesh(skv_x, skv_y, skv_z,skv_name):
+def obj_Mesh_conus(skv_x, skv_y, skv_z,skv_name):
+
+    return go.Mesh3d(
+
+    )
+
+def obj_Mesh_cube(skv_x, skv_y, skv_z,skv_name):
         return go.Mesh3d(
             x=[skv_x, skv_x, skv_x-2,skv_x-2, skv_x, skv_x, skv_x-2,skv_x-2],
             y=[skv_y, skv_y+2, skv_y+2, skv_y, skv_y, skv_y+2, skv_y+2, skv_y],
@@ -30,29 +36,28 @@ def obj_Mesh(skv_x, skv_y, skv_z,skv_name):
             showscale=True
         )
 
-
-
 def index(request):
 
+    data = Dashboard.objects.all()
+    print(data)
+
     layout =go.Layout(
+        title=f'Визуализация данных журнала ...',
         width=1600,
         height=900,
+        # legend_bgcolor= '#000000'
     )
-    
-    figure = go.Figure(data=[
-        obj_Mesh(1,1,5, 'skv-001'),
-        obj_Mesh(2,3,6, 'skv-002'),
-        obj_Mesh(5,2,3, 'skv-003'),
-        obj_Mesh(12,23,5, 'skv-004') 
-    ],
-    layout=layout
-    
-    
-    ).to_html()
+    # for item in data:
+    #     figure = go.Figure(obj_Mesh_cube(item.skv_x, item.skv_y, item.skv_z, item.skv_name), layout=layout).to_html()
+
+    figure = go.Figure([obj_Mesh_cube(item.skv_x, item.skv_y, item.skv_z, item.skv_name) for item in data], layout=layout ).to_html()
 
 
+    # for item in data:
+    #     figure.add_trace(obj_Mesh_cube(item.skv_x, item.skv_y, item.skv_z, item.skv_name)).to_html()
 
 
+    # figure.update_traces().to_html()
 
     context = {
         'figure' : figure, 
